@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор чисел</title>
+</head>
+<body>
+    <div class="calculator">
+        <p>Калькулятор</p>
+        <input class="inData" id="inputNumber" >
+        <button class="sendButton" type="submit" id="sendExpression">Отправить данные</button>
+        <button id="callbackCalculate">Вызов функции</button>
+        <div id="result">Ваш ответ:</div>
+    </div>
+</body>
+    <script>
+    let resultFunctionSum = 0;
+    let resultFunctionMinus = 0;
+    let resultFunctionDivide = 0;
+    let resultFunctionMultyply = 0;
+    let numberInteger = 0;
+    let result = '';
+    let numberOneTranslation = 1;
+    let numberSecondTranslation = 1;
+    let stringMatch = [];
+
+    function calculate (string = '10+10') {
+    let noSpaceText = string.replace(/ /g, '');
+
+    const stringMatchPattern = new RegExp('^([1-9]|[1][0])([*+\-\/])([1-9]|[1][0])$');
+    stringMatch = noSpaceText.match(stringMatchPattern);
+
+    const functionSum = () => resultFunctionSum = numberOneTranslation + numberSecondTranslation;
+
+    const functionMinus = () => resultFunctionMinus = numberOneTranslation - numberSecondTranslation;
+
+    const functionDivide = () => {
+    resultFunctionMultyply = numberOneTranslation / numberSecondTranslation;
+    numberInteger = parseInt(resultFunctionMultyply,10);
+    return numberInteger;
+    }
+
+    const functionMultyply = () => resultFunctionMultyply = numberOneTranslation * numberSecondTranslation;
+    
+    if (stringMatch !== null) {
+        numberOneTranslation = Number(stringMatch[1]);
+        numberSecondTranslation = Number(stringMatch[3]);
+        switch (stringMatch[2]) {
+        case '+': result = functionSum();
+                  break;
+        case '-': result = functionMinus();
+                  break;
+        case '/': result = functionDivide();
+                  break;
+        case '*': result = functionMultyply();
+                  break;
+        default: result = 'Error throw!';
+    }
+    } else {
+        result = 'Throw error!';
+    }
+        
+
+    return String(result);
+}
+console.log(calculate('2gh*9'));
+    </script>
+</body>
+</html>
