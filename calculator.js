@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Калькулятор чисел</title>
-</head>
-<body>
-    <div class="calculator">
-        <p>Калькулятор</p>
-        <input class="inData" id="inputNumber" >
-        <button class="sendButton" type="submit" id="sendExpression">Отправить данные</button>
-        <button id="callbackCalculate">Вызов функции</button>
-        <div id="result">Ваш ответ:</div>
-    </div>
-</body>
-    <script>
-    let resultFunctionSum = 0;
+let resultFunctionSum = 0;
     let resultFunctionMinus = 0;
     let resultFunctionDivide = 0;
     let resultFunctionMultyply = 0;
@@ -26,7 +9,7 @@
     let stringMatch = [];
     let stringMatchRomes = [];
     let currentFunctionResultRomes = null;
-    
+
 
     const romes = {'C' : 100, 'XC' :  90, 'L' : 50, 'XL' : 40, 'XXX' : 30, 'X' : 10, 'IX' : 9, 'VIII' : 8, 'VII' : 7, 'VI' : 6, 'V': 5, 'IV' : 4, 'III' : 3, 'II' : 2, 'I' : 1}
 
@@ -37,9 +20,9 @@
     stringMatch = noSpaceText.match(stringMatchPattern);
     const stringMatchPatternRomes = new RegExp('^([I]|[I]|[I][I][I]|[I][V]|[V]|[V][I]|[V][I][I]|[I][X]|[X])([*+\-\/])([I]|[I]|[I][I][I]|[I][V]|[V]|[V][I]|[V][I][I]|[I][X]|[X])$')
     stringMatchRomes = noSpaceText.match(stringMatchPatternRomes);
-    
+
     const functionSum = () => resultFunctionSum = numberOneTranslation + numberSecondTranslation;
-    
+
     const functionMinus = () => resultFunctionMinus = numberOneTranslation - numberSecondTranslation;
 
     const functionDivide = () => {
@@ -49,9 +32,9 @@
     }
 
     const functionMultyply = () => resultFunctionMultyply = numberOneTranslation * numberSecondTranslation;
-    
+
     if (stringMatch === null && stringMatchRomes === null) {
-        throw "Error Throw!---!";
+        return result = 'Error Throw!!!'
     }
 
     if (stringMatch !== null) {
@@ -66,10 +49,10 @@
                   break;
         case '*': result = functionMultyply();
                   break;
-        default: throw "Error Throw!";
+        default: result = 'Error throw!';
     }
     }
-        
+
     if (stringMatchRomes !== null) {
         for (keysRomesFirst in romes) {
             if (keysRomesFirst === stringMatchRomes[1] )
@@ -93,7 +76,7 @@
             break;
             case '*': currentFunctionResultRomes = functionMultyply();
             break;
-            default: throw "Error Throw!";
+            default: result = 'Error Throw!';
         }
     }
 
@@ -115,7 +98,4 @@
 }
 
 
-console.log(calculator('X/I'));
-    </script>
-</body>
-</html>
+module.exports = calculator; // Не трогайте эту строчку
